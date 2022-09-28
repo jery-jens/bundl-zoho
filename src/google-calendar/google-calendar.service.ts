@@ -5,6 +5,10 @@ export class GoogleCalendarService {
     testApp(): any {
         return {
             "test": "test"
-        };
+        }
+    }
+
+    public processMails(body): any {
+        return body;
     }
 }
