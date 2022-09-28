@@ -1,6 +1,4 @@
 export interface GoogleCalendar {
-    summary: string
-    description?: string
-    begins: string
     attendees: string
+    attendees_names: string
 }
