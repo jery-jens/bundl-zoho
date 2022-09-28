@@ -12,6 +12,7 @@ export class GoogleCalendarController {
 
     @Post('put-mails-into-account')
     public putMailsIntoAccount(@Body() body): void {
+      console.log(body);
       return this.googleCalendarService.processMails(body);
     }
 }
