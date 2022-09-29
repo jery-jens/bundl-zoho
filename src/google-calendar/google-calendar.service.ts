@@ -13,13 +13,13 @@ export class GoogleCalendarService {
     public processMails(attendees, names): any {
         const allAttendees = attendees.split(",") || [];
         const allNames = names.split(",") || [];
+        const mailPlaceholder = "chep";
 
         // To be filled in
         const connectedWithNames = [];
         const possibleAttendeesToAdd = [];
         
         for (let i = 0; i < allAttendees.length; i++) {
-            const mailPlaceholder = "chep.com";
             const attendeeInfo = {mail: allAttendees[i], name: allNames[i]};
 
             connectedWithNames.push(attendeeInfo);
@@ -30,6 +30,7 @@ export class GoogleCalendarService {
         }
 
         lastData = {
+            mail: mailPlaceholder,
             allAttendees: connectedWithNames,
             attendeesFromCHEP: possibleAttendeesToAdd,
             attendeesToAddToZOHO: [null]
