@@ -1,14 +1,45 @@
 import { Injectable } from '@nestjs/common';
 
+let lastData = {};
+
 @Injectable()
-export class GoogleCalendarService {
+export class GoogleCalendarService {    
     testApp(): any {
         return {
             "test": "test"
         }
     }
 
-    public processMails(body): any {
-        return body;
+    public processMails(attendees, names): any {
+        const allAttendees = attendees.split(",") || [];
+        const allNames = names.split(",") || [];
+        const mailPlaceholder = "chep";
+
+        // To be filled in
+        const connectedWithNames = [];
+        const possibleAttendeesToAdd = [];
+        
+        for (let i = 0; i < allAttendees.length; i++) {
+            const attendeeInfo = {mail: allAttendees[i], name: allNames[i]};
+
+            connectedWithNames.push(attendeeInfo);
+
+            if (allAttendees[i].includes(mailPlaceholder)) {
+               possibleAttendeesToAdd.push(attendeeInfo);
+            }
+        }
+
+        lastData = {
+            mail: mailPlaceholder,
+            allAttendees: connectedWithNames,
+            attendeesFromCHEP: possibleAttendeesToAdd,
+            attendeesToAddToZOHO: [null]
+        }
+
+        return lastData;
+    }
+
+    public getMails(): any {
+        return lastData;
     }
 }
