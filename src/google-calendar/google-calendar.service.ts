@@ -13,7 +13,7 @@ export class GoogleCalendarService {
     public processMails(attendees, names): any {
         const allAttendees = attendees.split(",") || [];
         const allNames = names.split(",") || [];
-        const mailPlaceholder = "chep";
+        let mailPlaceholder = "";
 
         // To be filled in
         const connectedWithNames = [];
@@ -24,15 +24,16 @@ export class GoogleCalendarService {
 
             connectedWithNames.push(attendeeInfo);
 
-            if (allAttendees[i].includes(mailPlaceholder)) {
+            if (!allAttendees[i].includes("bundl")) {
                possibleAttendeesToAdd.push(attendeeInfo);
-            }
+               mailPlaceholder = allAttendees[i].split("@")[1].split(".")[0];
+            };
         }
 
         lastData = {
             mail: mailPlaceholder,
             allAttendees: connectedWithNames,
-            attendeesFromCHEP: possibleAttendeesToAdd,
+            notBundlAttendees: possibleAttendeesToAdd,
             attendeesToAddToZOHO: [null]
         }
 
