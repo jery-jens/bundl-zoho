@@ -12,7 +12,6 @@ export class GoogleCalendarService {
 
     public processMails(attendees, names): any {
         const allAttendees = attendees.split(",") || [];
-        const allNames = names.split(",") || [];
         let mailPlaceholder = "";
 
         // To be filled in
@@ -20,7 +19,9 @@ export class GoogleCalendarService {
         const possibleAttendeesToAdd = [];
         
         for (let i = 0; i < allAttendees.length; i++) {
-            const attendeeInfo = {mail: allAttendees[i], name: allAttendees[i].split("@")[0]};
+            const name = allAttendees[i].split("@")[0].replace(".", " ");
+            const formalName = name.replace(/(^\w|\s\w)(\S*)/g, (_,m1,m2) => m1.toUpperCase()+m2.toLowerCase());
+            const attendeeInfo = {mail: allAttendees[i], name: formalName};
 
             connectedWithNames.push(attendeeInfo);
 
