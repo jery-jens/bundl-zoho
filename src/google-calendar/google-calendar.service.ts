@@ -20,7 +20,7 @@ export class GoogleCalendarService {
         const possibleAttendeesToAdd = [];
         
         for (let i = 0; i < allAttendees.length; i++) {
-            const attendeeInfo = {mail: allAttendees[i], name: allNames[i]};
+            const attendeeInfo = {mail: allAttendees[i], name: allAttendees[i].split("@")[0]};
 
             connectedWithNames.push(attendeeInfo);
 
