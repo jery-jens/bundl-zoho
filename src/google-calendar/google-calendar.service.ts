@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 let lastData = {};
+let lastTimestamp = 0;
 
 @Injectable()
 export class GoogleCalendarService {    
@@ -11,10 +12,24 @@ export class GoogleCalendarService {
     }
 
     public processMails(attendees, names): any {
+        const timestamp = Date.now();
+
+        if (timestamp === lastTimestamp) {
+            lastData = {
+                mail: null,
+                allAttendees: [null],
+                notBundlAttendees: [null],
+                attendeesToAddToZOHO: [null]
+            }
+    
+            return lastData;
+        };
+
+        lastTimestamp = timestamp;
+
         const allAttendees = attendees.split(",") || [];
         let mailPlaceholder = "";
 
-        // To be filled in
         const connectedWithNames = [];
         const possibleAttendeesToAdd = [];
         
